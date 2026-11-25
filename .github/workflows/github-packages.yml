@@ -1,0 +1,27 @@
+name: Publish to GitHub Packages
+
+# Mirrors the package to GitHub Packages so it shows up in the repo sidebar.
+# The main registry is still npmjs.com, published by hand with `npm publish`.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+      - run: npm ci
+      # GitHub Packages only accepts scoped, lowercase names.
+      - run: npm pkg set name=@clearanceclarence/relago
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
