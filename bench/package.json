@@ -1,0 +1,17 @@
+{
+  "name": "relago-bench",
+  "private": true,
+  "type": "module",
+  "description": "Reproduces the size comparison table in the README.",
+  "scripts": { "compare": "node compare.mjs" },
+  "devDependencies": {
+    "date-fns": "latest",
+    "dayjs": "latest",
+    "esbuild": "latest",
+    "javascript-time-ago": "latest",
+    "luxon": "latest",
+    "moment": "latest",
+    "timeago.js": "latest",
+    "tiny-relative-date": "latest"
+  }
+}
